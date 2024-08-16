@@ -26,5 +26,53 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public Reservation() {
+    }
 
+    public Reservation(Book book, User user, LocalDate reservationDate, Status status) {
+        this.book = book;
+        this.user = user;
+        this.reservationDate = reservationDate;
+        this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDate getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(LocalDate reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }

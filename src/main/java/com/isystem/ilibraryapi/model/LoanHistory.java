@@ -24,5 +24,54 @@ public class LoanHistory {
 
     private LocalDate returnDate;
 
+    public LoanHistory() {
 
+    }
+
+    public LoanHistory(Loan loan, Book book, LocalDate loanDate, LocalDate returnDate) {
+        this.loan = loan;
+        this.book = book;
+        this.loanDate = loanDate;
+        this.returnDate = returnDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public LocalDate getLoanDate() {
+        return loanDate;
+    }
+
+    public void setLoanDate(LocalDate loanDate) {
+        this.loanDate = loanDate;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
 }
