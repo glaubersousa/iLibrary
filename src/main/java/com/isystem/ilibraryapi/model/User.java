@@ -14,6 +14,8 @@ public class User {
 
     private String name;
 
+    private String cpf;
+
     private String email;
 
     private Integer phone;
@@ -26,8 +28,10 @@ public class User {
 
     }
 
-    public User(String name, String email, Integer phone, String address, LocalDate membershipDate) {
+    public User(String name, String email, Integer phone, String address, LocalDate membershipDate,
+                String cpf) {
         this.name = name;
+        this.cpf = cpf;
         this.email = email;
         this.phone = phone;
         this.address = address;
@@ -48,6 +52,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmail() {
