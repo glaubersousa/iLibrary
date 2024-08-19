@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @Service
 public class UserService {
@@ -24,6 +25,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUserById(Long id) {
+        Optional<User> optional = userRepository.findById(id);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        throw new IllegalArgumentException("Unable to locate this ID");
+    }
+
     public List<User> getUserByName(String name) {
         return userRepository.findByName(name);
     }
@@ -34,10 +43,18 @@ public class UserService {
 
     public User register(User user) {
         Optional<User> optional = userRepository.findByCpf(user.getCpf());
+        Optional<User> optionalEmail = userRepository.findByEmail(user.getEmail());
+        Optional<User> optionalPhone = userRepository.findByPhone(user.getPhone());
         if (optional.isEmpty()) {
-            return userRepository.save(user);
+            if (optionalEmail.isEmpty()) {
+                if (optionalPhone.isEmpty()) {
+                    return userRepository.save(user);
+                }
+                throw new UserDuplicateException("There is already a user with this phone " + user.getPhone());
+            }
+            throw new UserDuplicateException("There is already a user with this e-mail " + user.getEmail());
         }
-        throw new UserDuplicateException("There is already a user with this CPF " + user.getCpf());
+        throw new UserDuplicateException("There is already a user  with this CPF " + user.getCpf());
     }
 
     public User update(User user) {

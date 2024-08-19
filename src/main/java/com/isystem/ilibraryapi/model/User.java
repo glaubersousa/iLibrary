@@ -18,7 +18,7 @@ public class User {
 
     private String email;
 
-    private Integer phone;
+    private Long phone;
 
     private String address;
 
@@ -28,7 +28,7 @@ public class User {
 
     }
 
-    public User(String name, String email, Integer phone, String address, LocalDate membershipDate,
+    public User(String name, String email, Long phone, String address, LocalDate membershipDate,
                 String cpf) {
         this.name = name;
         this.cpf = cpf;
@@ -70,11 +70,11 @@ public class User {
         this.email = email;
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

@@ -6,7 +6,6 @@ import com.isystem.ilibraryapi.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,12 +31,8 @@ public class BookService {
         throw new IllegalArgumentException("Book not found with id " + id);
     }
 
-    public Book getBookByTitle(String title) {
-        Optional<Book> book = bookRepository.findByTitle(title);
-        if (book.isPresent()) {
-            return book.get();
-        }
-        throw new IllegalArgumentException("Book not found with title " + title);
+    public List<Book> getBookByTitle(String title) {
+        return bookRepository.findByTitleContainingIgnoreCase(title);
     }
 
     public Book getBookByAuthor(String author) {
@@ -49,7 +44,11 @@ public class BookService {
     }
 
     public Book register(Book book) {
-        return bookRepository.save(book);
+        Optional<Book> optional = bookRepository.findByTitleAndAuthorAndGenre(book.getTitle(), book.getAuthor(), book.getGenre());
+        if (optional.isEmpty()) {
+            return bookRepository.save(book);
+        }
+        throw new BookDuplicateException("There is already a book with the same title, author and genre information");
     }
 
     public Book update(Book book) {
